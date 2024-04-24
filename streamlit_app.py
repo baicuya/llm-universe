@@ -46,9 +46,8 @@ def main():
         # 将用户输入添加到对话历史中
         st.session_state.messages.append({"role": "user", "text": prompt})
 
-        if selected_method == "chat":
-            # 调用 respond 函数获取回答
-            answer = generate_response(prompt)
+        # 调用 respond 函数获取回答
+        answer = generate_response(prompt)
 
         # 检查回答是否为 None
         if answer is not None:

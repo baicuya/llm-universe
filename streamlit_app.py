@@ -12,19 +12,19 @@ from langchain.vectorstores.chroma import Chroma
 from langchain.memory import ConversationBufferMemory
 from langchain import OpenAI, LLMChain, PromptTemplate
 from langchain.chains import ConversationalRetrievalChain, ConversationChain
-from dotenv import load_dotenv, find_dotenv
-_ = load_dotenv(find_dotenv())    # read local .env file
+# from dotenv import load_dotenv, find_dotenv
+# _ = load_dotenv(find_dotenv())    # read local .env file
 
 
 #export OPENAI_API_KEY=
 #os.environ["OPENAI_API_BASE"] = 'https://api.chatgptid.net/v1'
-zhipuai_api_key = os.environ['ZHIPUAI_API_KEY']
-llm = ChatZhipuAI(model="glm-4", temperature=0, api_key=zhipuai_api_key)
+# zhipuai_api_key = os.environ['ZHIPUAI_API_KEY']
+# llm = ChatZhipuAI(model="glm-4", temperature=0, api_key=zhipuai_api_key)
 
 
 def generate_response(input_text):
     # llm = ChatOpenAI(temperature=0.7, openai_api_key=openai_api_key)
-    # llm = ChatZhipuAI(model="glm-4", temperature=0, api_key=api_key)
+    llm = ChatZhipuAI(model="glm-4", temperature=0, api_key=zhipuai_api_key)
     output = llm.invoke(input_text)
     output_parser = StrOutputParser()
     output = output_parser.invoke(output)
@@ -35,7 +35,7 @@ def generate_response(input_text):
 # Streamlit 应用程序界面
 def main():
     st.title('🌙(>^ω^<) your assistant(>^ω^<)🌙')
-    # zhipuai_api_key = st.sidebar.text_input('ZHIPUAI_API_KEY', type='password')
+    zhipuai_api_key = st.sidebar.text_input('ZHIPUAI_API_KEY', type='password')
 
     # 用于跟踪对话历史
     if 'messages' not in st.session_state:

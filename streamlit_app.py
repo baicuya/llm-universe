@@ -22,7 +22,7 @@ from langchain.chains import ConversationalRetrievalChain, ConversationChain
 # llm = ChatZhipuAI(model="glm-4", temperature=0, api_key=zhipuai_api_key)
 
 
-def generate_response(input_text):
+def generate_response(input_text, zhipu_api_key):
     # llm = ChatOpenAI(temperature=0.7, openai_api_key=openai_api_key)
     llm = ChatZhipuAI(model="glm-4", temperature=0, api_key=zhipuai_api_key)
     output = llm.invoke(input_text)
@@ -47,7 +47,7 @@ def main():
         st.session_state.messages.append({"role": "user", "text": prompt})
 
         # 调用 respond 函数获取回答
-        answer = generate_response(prompt)
+        answer = generate_response(prompt, zhipu_api_key)
 
         # 检查回答是否为 None
         if answer is not None:

@@ -1,10 +1,15 @@
 import streamlit as st
 from langchain_openai import ChatOpenAI
+<<<<<<< HEAD
+=======
+from langchain_community.chat_models import ChatZhipuAI
+>>>>>>> 196573ce229cf651eaf9817103776d3e58628879
 import os
 from langchain_core.output_parsers import StrOutputParser
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 import sys
+<<<<<<< HEAD
 sys.path.append("../C3 搭建知识库") # 将父目录放入系统路径中
 from zhipuai_embedding import ZhipuAIEmbeddings
 from langchain.vectorstores.chroma import Chroma
@@ -12,21 +17,42 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())    # read local .env file
+=======
+# sys.path.append("../C3 搭建知识库") # 将父目录放入系统路径中
+# from zhipuai_embedding import ZhipuAIEmbeddings
+from langchain.vectorstores.chroma import Chroma
+from langchain.memory import ConversationBufferMemory
+from langchain import OpenAI, LLMChain, PromptTemplate
+from langchain.chains import ConversationalRetrievalChain, ConversationChain
+# from dotenv import load_dotenv, find_dotenv
+# _ = load_dotenv(find_dotenv())    # read local .env file
+>>>>>>> 196573ce229cf651eaf9817103776d3e58628879
 
 
 #export OPENAI_API_KEY=
 #os.environ["OPENAI_API_BASE"] = 'https://api.chatgptid.net/v1'
+<<<<<<< HEAD
 zhipuai_api_key = os.environ['ZHIPUAI_API_KEY']
 
 
 def generate_response(input_text, openai_api_key):
     llm = ChatOpenAI(temperature=0.7, openai_api_key=openai_api_key)
+=======
+# zhipuai_api_key = os.environ['ZHIPUAI_API_KEY']
+# llm = ChatZhipuAI(model="glm-4", temperature=0, api_key=zhipuai_api_key)
+
+
+def generate_response(input_text, zhipuai_api_key):
+    # llm = ChatOpenAI(temperature=0.7, openai_api_key=openai_api_key)
+    llm = ChatZhipuAI(model="glm-4", temperature=0, api_key=zhipuai_api_key)
+>>>>>>> 196573ce229cf651eaf9817103776d3e58628879
     output = llm.invoke(input_text)
     output_parser = StrOutputParser()
     output = output_parser.invoke(output)
     #st.info(output)
     return output
 
+<<<<<<< HEAD
 def get_vectordb():
     # 定义 Embeddings
     embedding = ZhipuAIEmbeddings()
@@ -86,6 +112,13 @@ def main():
         "你想选择哪种模式进行对话？",
         ["None", "qa_chain", "chat_qa_chain"],
         captions = ["不使用检索问答的普通模式", "不带历史记录的检索问答模式", "带历史记录的检索问答模式"])
+=======
+
+# Streamlit 应用程序界面
+def main():
+    st.title('🌙(>^ω^<) your assistant(>^ω^<)🌙')
+    zhipuai_api_key = st.sidebar.text_input('ZHIPUAI_API_KEY', type='password')
+>>>>>>> 196573ce229cf651eaf9817103776d3e58628879
 
     # 用于跟踪对话历史
     if 'messages' not in st.session_state:
@@ -96,6 +129,7 @@ def main():
         # 将用户输入添加到对话历史中
         st.session_state.messages.append({"role": "user", "text": prompt})
 
+<<<<<<< HEAD
         if selected_method == "None":
             # 调用 respond 函数获取回答
             answer = generate_response(prompt, openai_api_key)
@@ -103,6 +137,10 @@ def main():
             answer = get_qa_chain(prompt,openai_api_key)
         elif selected_method == "chat_qa_chain":
             answer = get_chat_qa_chain(prompt,openai_api_key)
+=======
+        # 调用 respond 函数获取回答
+        answer = generate_response(prompt, zhipuai_api_key)
+>>>>>>> 196573ce229cf651eaf9817103776d3e58628879
 
         # 检查回答是否为 None
         if answer is not None:

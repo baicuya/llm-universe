@@ -35,6 +35,7 @@ def generate_response(input_text,openai_api_key):
 # Streamlit 应用程序界面
 def main():
     st.title('🌙(>^ω^<) your assistant(>^ω^<)🌙')
+    openai_api_key = st.sidebar.text_input('OpenAI API Key', type='password')
     # zhipuai_api_key = st.sidebar.text_input('ZHIPUAI_API_KEY', type='password')
 
     # 添加一个选择按钮来选择不同的模型

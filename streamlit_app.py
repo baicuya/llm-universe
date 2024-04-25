@@ -42,8 +42,8 @@ def main():
     #selected_method = st.sidebar.selectbox("选择模式", ["qa_chain", "chat_qa_chain", "None"])
     selected_method = st.radio(
         "你想选择哪种模式进行对话？",
-        ["chat"],
-        captions = ["chat"])
+        ["once_chat"],
+        captions = ["一次性对话"])
 
     # 用于跟踪对话历史
     if 'messages' not in st.session_state:
@@ -54,7 +54,7 @@ def main():
         # 将用户输入添加到对话历史中
         st.session_state.messages.append({"role": "user", "text": prompt})
 
-        if selected_method == "chat":
+        if selected_method == "once_chat":
             # 调用 respond 函数获取回答
             answer = generate_response(prompt, openai_api_key)
 
